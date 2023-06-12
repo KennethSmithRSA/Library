@@ -27,16 +27,22 @@ function addBookToLibrary(title, author, pages, read) {
 
 function renderLibrary() {
     const container = document.querySelector('#libraryContainer');
+    if (myLibraryArray.length === 0) {
+        container.innerHTML = ``;
+    }
     let bookCards = ``;
     let length = myLibraryArray.length;
     for (let i = 0; i < length; i ++) {
         bookCards += `<div class="bookCard"  data-index='${i}'>
         <div class="bookInformation">${myLibraryArray[i].info()}</div>
-        <button class="removeBookFromLibrary">X</button>
-        <button class="changeReadStatus">Read</button>
-    </div>`;
+        <button class="removeBookFromLibraryBtn">X</button>
+        <button class="changeReadStatusBtn">Read</button>
+        </div>`;
         container.innerHTML = bookCards;
     }
+
+    removeBookCard();
+    changeReadStatus();
 };
 
 renderLibrary();
@@ -45,17 +51,42 @@ const newBookInfoBtn = document.getElementById("submitNewBookInfo");
 const newBook = document.getElementById("newBook");
 
 function renderNewBookForm() {
-    const main = document.querySelector('body');
-    console.log(main)
+    const newBookForm = document.getElementById("newBookForm");
+    newBookForm.style.display = "block";
 };
 
-// function removeBookCard() {
+function removeBookCard() {
+    const removes = document.querySelectorAll('.removeBookFromLibraryBtn');
+    const removesArr = [...removes];
 
-// };
+    removesArr.forEach((ele) => {
+    ele.addEventListener("click", function() {
+        let parent = ele.parentNode;
+        let index = parent.dataset.index;
+        myLibraryArray.splice(index, 1);
+        renderLibrary();
+    });
+});
+};
 
-// function changeReadStatus() {
+function changeReadStatus() {
+    const changeReadState = document.querySelectorAll('.changeReadStatusBtn');
+    const changeReadStateArr = [...changeReadState];
+    
+    changeReadStateArr.forEach((ele) => {
+        ele.addEventListener("click", function() {
+            let parent = ele.parentNode;
+            let index = parent.dataset.index;
 
-// };
+            if (myLibraryArray[index].read === true) {
+                myLibraryArray[index].read = false;
+            } else {
+                myLibraryArray[index].read = true;
+            }
+            renderLibrary();
+        });
+    });
+};
 
 newBookInfoBtn.addEventListener('click', () => {
     event.preventDefault();
@@ -70,33 +101,4 @@ newBookInfoBtn.addEventListener('click', () => {
     newBookForm.style.display = "none";
 });
 
-newBook.addEventListener('click', () => {
-    const newBookForm = document.getElementById("newBookForm");
-    newBookForm.style.display = "block";
-    renderNewBookForm();
-});
-
-const removes = document.querySelectorAll('.removeBookFromLibrary');
-
-removes.forEach((remove) => {
-    remove.addEventListener('click', () => {
-        let parent = remove.parentNode;
-        let index = parent.dataset.index;
-        myLibraryArray[index].removeBook();        
-    });
-});
-
-const changeReadStatus = document.querySelectorAll('.changeReadStatus');
-
-changeReadStatus.forEach((readStatus) => {
-    readStatus.addEventListener('click', () => {
-        let parent = readStatus.parentNode;
-        let index = parent.dataset.index;
-        if (myLibraryArray[index].read === true) {
-            myLibraryArray[index].read = false;
-        } else {
-            myLibraryArray[index].read = true;
-        }
-        renderLibrary();
-    });
-})
+newBook.addEventListener('click', renderNewBookForm);
