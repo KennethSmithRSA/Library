@@ -1,16 +1,30 @@
 * {
     margin: 0;
     padding: 0;
+    font-size: 14px;
+}
+
+body {
+    background-color: #f5f1f1;
+}
+
+#newBook {
+    margin-top: 10px;
+    width: 70px;
+    display: flex;
+    margin-left: calc(50% - 35px);
+    margin-bottom: 30px;
 }
 
 #newBookForm {
-    border: 1px solid red;
+    border: 3px solid #222831;
     width: 300px;
-    height: 150px;
+    height: fit-content;
     display: none;
     position: absolute;
     left: calc(50% - 150px);
     top: calc(25% - 75px);
+    background-color: #393E46;
 }
 
 #newBookForm > .inputSection {
@@ -20,38 +34,42 @@
 #newBookForm > .inputSection > input[type=text],
 #newBookForm > .inputSection > input[type=checkbox] {
     width: 125px;
-    height: 17px;
+    height: 23px;
+    margin-bottom: 5px;
 }
 
 #newBookForm > .inputSection > label {
     display: inline-block;
     width: 100px;
     text-align: right;
+    color: whitesmoke;
 }
 
 #newBookForm > button {
     width: 120px;
-    margin-left: 30%;
+    margin-top: 10px;
+    margin-left: 33%;
+    margin-bottom: 10px;
 }
 
 #libraryContainer {
-    
-
     display: flex;
-    width: 400px;
+    width: 420px;
     height: auto;
     flex-wrap: wrap;
-    margin-left: calc(25% - 10px);
+    margin-left: calc(25% - 30px);
 }
 
 .bookCard {
     max-width: 200px;
     height: 100px;
     display: grid;
-    border: 1px solid red;
-    grid-template-columns: 3fr 1fr;
+    border: 3px solid #222831;
+    box-shadow: -10px 0px 20px -5px #FFD369;
+    grid-template-columns: 125px 75px;
     grid-template-rows: repeat(2, 1fr);
     justify-items: end;
+    margin: 5px;
 }
 
 .bookCard > .bookInformation {
@@ -63,7 +81,7 @@
 .bookCard > .removeBookFromLibraryBtn {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    width: 17px;
+    width: 23px;
     height: fit-content;
     border-radius: 100%;
     margin: 5px;
@@ -73,8 +91,8 @@
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     width: fit-content;
-    height: 20px;
-    align-content: center;
+    max-height: 23px;
     margin-right: 5px;
-    margin-top: 50%;
+    margin-top: 20px;
+    text-align: center;
 }
