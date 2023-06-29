@@ -1,23 +1,21 @@
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", "295", 'Read');
-const theHobbi1t = new Book("The Hobbit1", "J.R.R. Tolkien", "295", 'Not Read');
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-let myLibraryArray = [theHobbit, theHobbi1t];
-
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-
-    this.info = () => {
+    info() {
         return (`${this.title} by ${this.author}, ${this.pages} pages.`);
     }
 }
 
-Book.prototype.removeBook = function(index) {
-    myLibraryArray.splice(index, 1);
-    renderLibrary();
-}
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", "295", 'Read');
+const theHobbi1t = new Book("The Hobbit1", "J.R.R. Tolkien", "295", 'Not Read');
+let myLibraryArray = [theHobbit, theHobbi1t];
+
+
 
 function addBookToLibrary(title, author, pages, read) {
     let book = new Book(title, author, pages, read);
@@ -33,7 +31,6 @@ function renderLibrary() {
     let bookCards = ``;
     let length = myLibraryArray.length;
     for (let i = 0; i < length; i ++) {
-        // let readStatus = myLibraryArray[i].read ? 'Read' : 'Not Read';
         bookCards += `<div class="bookCard"  data-index='${i}'>
         <div class="bookInformation">${myLibraryArray[i].info()}</div>
         <button class="removeBookFromLibraryBtn">X</button>
